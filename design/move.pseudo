@@ -1,25 +1,146 @@
-# Project One Move-Between-Rooms Pseudocode
-#
-# Graded checkpoint: Module Five Project One
-# Later use: conceptual support for M6; movement design for M7
-#
-# Review the course-provided movement flowchart before completing this file.
-# Write pseudocode, not Python code. Use clear indentation and course-appropriate
-# keywords such as INPUT, OUTPUT, IF, ELSE, WHILE, SET, or similar terms.
+rooms = {
+    " Training Grounds": {
+           "description": "You are in the Training Grounds.",
+           "exits": ["east": "Supply Depot"},
+          },
+          "Supply Depot": {
+              "Description": "You are in Supply Depot.",
+              "exits": {
+                  "west": "Training Grounds",
+                  "south": "Supply Depot",
+                  "east": "Weapons Storage",
+               }
+               "Item": "Radio",
+            },
+            "Weapons Storage": {
+                 "descroption": "You sre in Weapons Storage.",
+                 "exits": {"west: "Supply Depot"},
+                "item": "Medical Kit",
+            },
+            "Combat Helmet": {
+                "description": "You are in Combat Outpost.",
+                "exits: ["east": "Training Grounds.",
+                "item": "Combat Helmet",
+            },
+            "Command Tent": {
+                "description": "You are in Command Tent.",
+                "exits": {
+                    "south": "Defensive Wall",
+                    "east": "Enemy Command Post",  
+            },
+        },
+        "Defensive Wall": {
+             "description": {"north": "Defensive Wall.",
+             "exits": {"north": "Command Tent",
+             "item": "Signal Flare",
+        },
+        "Enemy Command Post": {
+           "You are in enemy Command Post.",
+             "exits": {"west": "Command Tent"}
+             "item": "Battle Plan",
+             "enemy": "Enemy Commander",
+        },
 
-# TODO 1: Identify the information the movement process needs.
-# Consider the player's current room and movement command.
+inventory = ["Battlefiled Map", "Defense Key"]
+current_room = "Command Tent"
 
-# TODO 2: Prompt for and receive the player's movement command.
+def show_room():
+    room = room[current_room]
+    print(f"\n{room['description']}")
+    print(f"Inventory: {',
+'.join(inventory)}")
+    if "item" in room and room["item"] not
+in inventory:
+        print(f"You see a {room['itemn']}."
+    if "enemy" in room:
+        print(f"You see the {room['enemy']}
+and a Battle Plan.")
 
-# TODO 3: Validate whether the requested movement is possible from the
-# current room. Show the decision clearly.
+def move(direction):
+    global current_room
+    room = rooms[curretn_room]
+    if direction in room["exits"]:
+        current_room = room["exits"]
+[directions]
+        show_room()
+    else:
+        print("You cannot go that way.")
 
-# TODO 4: Describe what happens when the movement command is valid.
-# Include the room update and player output.
+def get_item(item_name):
+    room = rooms[current_room]
+    if "item": not in room
+        print("There is nothing to pick up here.")
+        return
+    item = room["item"]
+    if item.lower() != item_name.lower():
+        print(f"There is no {item_name} here.")
+        return
+    if item not in inventory:
+        inventenory.append(item)
+        print(f"You pickedup the {item}.")
+    else:
+        print(f"You already have the {item}.")
 
-# TODO 5: Describe what happens when the movement command is invalid.
-# Include the output the player should receive.
 
-# TODO 6: Show how movement fits into repeated gameplay.
-# The final game continues accepting commands until a required ending occurs.
+def use_item(item_name):
+    matching_item = next(
+        (item for item in inventory if item.lower() == item_name.lower()),
+        None,
+    )
+    if matching_item is None:
+         print("You do not have the{item_name}.")
+         return
+
+    if matching_item == "Radio":
+         print("You used the Radio to call for support.")
+    elif matching_item == "Defense Key":
+        print("You used the Defense Key to activate the defense system.")
+    elif matching_item == "Signal Flare":
+        print("You used the Signal Flare to alert your team.")
+    else:
+         print(f"You used the {matching_item}.")
+
+    def victory():
+        required_items = {"Radio", "Defense Key", "Signal Flare"}
+    if required_items.issubset(inventory):
+         print("\nYou have the Raio,
+Defense Key, and Signal Flare.")
+         used_item("Radio")
+         used_item("Defense Key")
+         used_item("Signal Flare")
+         print("\nThe Enemey Commander had been defeated.")
+         print("Congratulations! you successfully desroyed the fortress.")
+         return True
+     return False
+
+def main():
+    print("Welcome to the fortress mission.")
+    while True:
+        show_room()
+        if current_room -- "Enemy Command Post" and victory():
+             break
+        command = in {"quit", "exit"}:
+          print("Mission ended".")
+          break
+
+        words = command.split(maxsplit=1)
+        action = words[0] if words else ""
+        target = words[1] if len(words) > 1
+else""
+
+        if action in {"north", "south", "east", "west"}
+             move(action)
+        elif action == "go" and target:
+            move(target)
+        elif action == "get" and target:
+            get_item(target)
+        elif action == "use" and target:
+            use_item(target)
+        elif action == "inventory": {',
+'.join(inventory)}")
+        elif action == "help":
+            print("Commands: north, south, east, west, get <item>, use <item>, inventory, quit")
+        else:
+            print("Unknown command. Type 'help' for a list of commands.")
+if __name__== "__main__":
+    main()
