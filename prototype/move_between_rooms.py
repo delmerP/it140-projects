@@ -7,7 +7,6 @@ rooms = {
     "Bedroom": {"north": "Great Hall", "east": "Cellar"},
     "Cellar": {"west": "Bedroom"},
 }
-
 current_room = "Great Hall"
 
 print("Welcome to the Move Between Rooms Game!")
